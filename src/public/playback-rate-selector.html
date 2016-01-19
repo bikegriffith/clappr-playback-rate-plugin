@@ -1,0 +1,8 @@
+<button data-playback-rate-button>
+  <%= title %>
+</button>
+<ul>
+  <% for (var i = 0; i < playbackRates.length; i++) { %>
+    <li><a href="#" data-playback-rate-select="<%= playbackRates[i].value %>"><%= playbackRates[i].label %></a></li>
+  <% }; %>
+</ul>
