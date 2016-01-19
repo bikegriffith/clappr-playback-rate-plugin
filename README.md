@@ -1,5 +1,7 @@
 # Clappr Playback Rate Plugin
 
+## <font color="red">NOTE: This is an alpha version and is not yet ready</font>
+
 ## Usage
 
 Add both Clappr and Playback Rate plugin scripts to your HTML:
