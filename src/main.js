@@ -1,4 +1,4 @@
-import {Events, Styler, UICorePlugin, template} from 'Clappr'
+import {Events, Styler, UICorePlugin, template} from 'clappr'
 import pluginHtml from './public/playback-rate-selector.html'
 import pluginStyle from './public/style.scss'
 
