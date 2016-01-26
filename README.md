@@ -48,3 +48,7 @@ var player = new Clappr.Player({
 This works by settings the `playbackRate` property of the `<video>` element; accordingly, it does
 not work for the Flash playback.
 
+
+## Changelog
+
+#### v0.1.0 - Initial release
