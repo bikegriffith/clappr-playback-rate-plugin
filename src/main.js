@@ -2,11 +2,17 @@ import {Events, Styler, UICorePlugin, template} from 'clappr'
 import pluginHtml from './public/playback-rate-selector.html'
 import pluginStyle from './public/style.scss'
 
+
 const DEFAULT_PLAYBACK_RATES = [
   {value: '0.5', label: '0.5x'},
-  {value: '1.0', label: '1x'},
+  {value: '0.75', label: '0.75x'},
+  {value: '1.0', label: 'Normal'},
+  {value: '1.5', label: '1.5x'},
   {value: '2.0', label: '2x'}
 ];
+
+const DEFAULT_PLAYBACK_RATE = '1.0';
+
 
 export default class PlaybackRatePlugin extends UICorePlugin {
 
@@ -61,9 +67,14 @@ export default class PlaybackRatePlugin extends UICorePlugin {
 
   render() {
     //console.log('PlaybackRatePlugin#render()');
-    this.playbackRates = DEFAULT_PLAYBACK_RATES;
+    const cfg = this.core.options.playbackRateConfig || {};
+
+    if (!this.playbackRates) {
+      this.playbackRates = cfg.options || DEFAULT_PLAYBACK_RATES;
+    }
+
     if (!this.selectedRate) {
-      this.selectedRate = '1.0';
+      this.selectedRate = cfg.defaultValue || DEFAULT_PLAYBACK_RATE;
     }
 
     if (this.shouldRender()) {
