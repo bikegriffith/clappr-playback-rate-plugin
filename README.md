@@ -4,13 +4,22 @@
 
 ## Usage
 
-Add both Clappr and Playback Rate plugin scripts to your HTML:
+```
+npm install --save clappr-playback-rate-plugin
+```
+
+Add both Clappr and Playback Rate plugin scripts:
 
 ```html
 <head>
   <script type="text/javascript" src="http://cdn.clappr.io/latest/clappr.min.js"></script>
   <script type="text/javascript" src="dist/clappr-playback-rate-plugin.js"></script>
 </head>
+```
+or
+```javascript
+import Clappr from 'clappr';
+import PlaybackRatePlugin from 'clappr-playback-rate-plugin';
 ```
 
 Then just add `PlaybackRatePlugin` into the list of plugins of your player instance:

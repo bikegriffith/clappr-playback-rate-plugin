@@ -5,7 +5,7 @@ var filename = 'clappr-playback-rate-plugin.js'
 module.exports = {
   entry: path.resolve(__dirname, 'index.js'),
   externals: {
-    "clappr": "clappr",
+    "clappr": "Clappr",
     "clappr-zepto": "clappr-zepto"
   },
   module: {
