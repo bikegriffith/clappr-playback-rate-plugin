@@ -36,18 +36,20 @@ export default class PlaybackRatePlugin extends UICorePlugin {
   }
 
   bindEvents() {
-    this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_CONTAINERCHANGED, this.reload)
-    this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_RENDERED, this.render)
+    this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_CONTAINERCHANGED, this.reload);
+    this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_RENDERED, this.render);
+    this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_HIDE, this.hideContextMenu);
   }
 
   unBindEvents() {
-    this.stopListening(this.core.mediaControl, Events.MEDIACONTROL_CONTAINERCHANGED)
-    this.stopListening(this.core.mediaControl, Events.MEDIACONTROL_RENDERED)
+    this.stopListening(this.core.mediaControl, Events.MEDIACONTROL_CONTAINERCHANGED);
+    this.stopListening(this.core.mediaControl, Events.MEDIACONTROL_RENDERED);
+    this.stopListening(this.core.mediaControl, Events.MEDIACONTROL_HIDE);
   }
 
   reload() {
-    this.unBindEvents()
-    this.bindEvents()
+    this.unBindEvents();
+    this.bindEvents();
   }
 
   shouldRender() {
@@ -82,14 +84,14 @@ export default class PlaybackRatePlugin extends UICorePlugin {
       var html = t({playbackRates: this.playbackRates, title: this.getTitle()});
       this.$el.html(html);
 
-      var style = Styler.getStyleFor(pluginStyle, {baseUrl: this.core.options.baseUrl})
-      this.$el.append(style)
+      var style = Styler.getStyleFor(pluginStyle, {baseUrl: this.core.options.baseUrl});
+      this.$el.append(style);
 
-      this.core.mediaControl.$('.media-control-right-panel').append(this.el)
-      this.updateText()
+      this.core.mediaControl.$('.media-control-right-panel').append(this.el);
+      this.updateText();
     }
 
-    return this
+    return this;
   }
 
   onRateSelect(event) {
@@ -108,11 +110,15 @@ export default class PlaybackRatePlugin extends UICorePlugin {
   }
 
   onShowMenu(event) {
-    this.toggleContextMenu()
+    this.toggleContextMenu();
   }
 
   toggleContextMenu() {
-    this.$('.playback_rate ul').toggle()
+    this.$('.playback_rate ul').toggle();
+  }
+
+  hideContextMenu() {
+    this.$('.playback_rate ul').hide();
   }
 
   setActiveListItem(rateValue) {
@@ -135,7 +141,7 @@ export default class PlaybackRatePlugin extends UICorePlugin {
   }
 
   updateText() {
-    this.buttonElement().text(this.getTitle())
+    this.buttonElement().text(this.getTitle());
     this.setActiveListItem(this.selectedRate);
   }
 }
