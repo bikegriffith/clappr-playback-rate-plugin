@@ -60,5 +60,5 @@ not work for the Flash playback.
 
 ## Changelog
 
-#### v0.1.0 - Initial release
 #### v0.1.1 - Bugfix on external clappr dependency
+#### v0.1.0 - Initial release
