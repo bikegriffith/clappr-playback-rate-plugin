@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var filename = 'clappr-playback-rate-plugin.js'
 
 module.exports = {
-  entry: path.resolve(__dirname, 'index.js'),
+  entry: path.resolve(__dirname, 'src/main.js'),
   externals: {
     "clappr": "Clappr",
     "clappr-zepto": "clappr-zepto"

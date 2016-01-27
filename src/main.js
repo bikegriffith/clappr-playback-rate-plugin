@@ -58,7 +58,6 @@ export default class PlaybackRatePlugin extends UICorePlugin {
     }
 
     var currentPlayback = this.core.getCurrentPlayback();
-    window.playback = currentPlayback;
     if (currentPlayback.tagName != 'video' && currentPlayback.tagName != 'audio') {
       //console.warn('PlaybackRatePlugin#shouldRender: Cannot affect rate for playback', currentPlayback);
       return false;
