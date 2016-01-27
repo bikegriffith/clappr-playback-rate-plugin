@@ -60,6 +60,5 @@ not work for the Flash playback.
 
 ## Changelog
 
-#### v0.1.2 - Tweak index.js to get top-level require functional
-#### v0.1.1 - Bugfix on external clappr dependency
+#### v0.1.3 - Fix import experience for npm users (default to ES5 experience working)
 #### v0.1.0 - Initial release
