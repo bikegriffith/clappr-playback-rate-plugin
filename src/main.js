@@ -98,6 +98,7 @@ export default class PlaybackRatePlugin extends UICorePlugin {
     //console.log('onRateSelect', event.target);
     let rate = event.target.dataset.playbackRateSelect;
     this.setSelectedRate(rate);
+    this.toggleContextMenu();
     event.stopPropagation();
     return false;
   }
@@ -123,7 +124,6 @@ export default class PlaybackRatePlugin extends UICorePlugin {
     this.core.$el.find('video').get(0).playbackRate = rate;
     this.selectedRate = rate;
     this.updateText();
-    this.toggleContextMenu();
   }
 
   setActiveListItem(rateValue) {
