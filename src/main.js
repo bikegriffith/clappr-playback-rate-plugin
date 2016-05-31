@@ -39,6 +39,7 @@ export default class PlaybackRatePlugin extends UICorePlugin {
     this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_CONTAINERCHANGED, this.reload);
     this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_RENDERED, this.render);
     this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_HIDE, this.hideContextMenu);
+    this.listenTo(this.core.mediaControl, PlaybackRatePlugin.MEDIACONTROL_PLAYBACKRATE, this.updatePlaybackRate);
   }
 
   unBindEvents() {
@@ -96,14 +97,8 @@ export default class PlaybackRatePlugin extends UICorePlugin {
   onRateSelect(event) {
     //console.log('onRateSelect', event.target);
     let rate = event.target.dataset.playbackRateSelect;
-
-    // Set <video playbackRate="..."
-    this.core.$el.find('video').get(0).playbackRate = rate;
-
-    this.selectedRate = rate;
-    this.updateText();
+    this.setSelectedRate(rate);
     this.toggleContextMenu();
-
     event.stopPropagation();
     return false;
   }
@@ -118,6 +113,17 @@ export default class PlaybackRatePlugin extends UICorePlugin {
 
   hideContextMenu() {
     this.$('.playback_rate ul').hide();
+  }
+
+  updatePlaybackRate(rate) {
+    this.setSelectedRate(rate);
+  }
+
+  setSelectedRate(rate) {
+    // Set <video playbackRate="..."
+    this.core.$el.find('video').get(0).playbackRate = rate;
+    this.selectedRate = rate;
+    this.updateText();
   }
 
   setActiveListItem(rateValue) {
@@ -144,3 +150,5 @@ export default class PlaybackRatePlugin extends UICorePlugin {
     this.setActiveListItem(this.selectedRate);
   }
 }
+
+PlaybackRatePlugin.MEDIACONTROL_PLAYBACKRATE = 'playbackRate';
