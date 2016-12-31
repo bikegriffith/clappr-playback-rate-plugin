@@ -16,8 +16,6 @@ const DEFAULT_PLAYBACK_RATE = '1.0';
 
 export default class PlaybackRatePlugin extends UICorePlugin {
 
-  static get version() { return VERSION }
-
   get name() { return 'playback_rate'; }
   get template() { return template(pluginHtml); }
 
@@ -151,4 +149,5 @@ export default class PlaybackRatePlugin extends UICorePlugin {
   }
 }
 
+PlaybackRatePlugin.type = 'core';
 PlaybackRatePlugin.MEDIACONTROL_PLAYBACKRATE = 'playbackRate';
