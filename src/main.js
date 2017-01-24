@@ -126,7 +126,7 @@ export default class PlaybackRatePlugin extends UICorePlugin {
 
   setActiveListItem(rateValue) {
     this.$(`a`).removeClass('active');
-    this.$(`a[data-playback-rate-select="${rateValue}"`).addClass('active');
+    this.$(`a[data-playback-rate-select="${rateValue}"]`).addClass('active');
   }
 
   buttonElement() {
