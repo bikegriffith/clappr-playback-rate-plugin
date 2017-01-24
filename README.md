@@ -60,5 +60,4 @@ not work for the Flash playback.
 
 ## Changelog
 
-#### v0.1.4 - Fix import experience for npm users (default to ES5 experience working)
-#### v0.1.0 - Initial release
+See [https://github.com/bikegriffith/clappr-playback-rate-plugin/releases]
