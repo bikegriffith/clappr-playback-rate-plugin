@@ -60,4 +60,4 @@ not work for the Flash playback.
 
 ## Changelog
 
-See [https://github.com/bikegriffith/clappr-playback-rate-plugin/releases]
+See [Releases](https://github.com/bikegriffith/clappr-playback-rate-plugin/releases)
