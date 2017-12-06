@@ -119,7 +119,7 @@ export default class PlaybackRatePlugin extends UICorePlugin {
 
   setSelectedRate(rate) {
     // Set <video playbackRate="..."
-    this.core.$el.find('video').get(0).playbackRate = rate;
+    this.core.$el.find('video,audio').get(0).playbackRate = rate;
     this.selectedRate = rate;
     this.updateText();
   }
