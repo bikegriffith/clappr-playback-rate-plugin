@@ -4,14 +4,11 @@
   "version": "0.3.2",
   "license": "MIT",
   "repository": "bikegriffith/clappr-playback-rate-plugin",
-  "main": "index.js",
+  "main": "lib/clappr-playback-rate-plugin.js",
   "scripts": {
-    "release": "node_modules/.bin/webpack --progress -d --optimize-minimize --optimize-dedupe --output-filename clappr-playback-rate-plugin.min.js",
-    "build": "node_modules/.bin/webpack --progress",
-    "watch": "node_modules/.bin/webpack --progress --watch",
-    "test": "node_modules/.bin/karma start --single-run --browsers Chrome",
-    "start": "node_modules/.bin/webpack-dev-server --content-base public/ --output-public-path /latest --hot",
-    "lock": "rm -rf npm-shrinkwrap.json node_modules && npm install --silent && npm shrinkwrap"
+    "build": "webpack --env dev && webpack --env build",
+    "dev": "webpack --progress --colors --watch --env dev",
+    "test": "node_modules/.bin/karma start --single-run --browsers Chrome"
   },
   "author": {
     "name": "Mike Griffith",
@@ -23,25 +20,23 @@
     "plugin"
   ],
   "dependencies": {
-    "clappr": "latest",
+    "clappr": "^0.2.79",
     "clappr-zepto": "latest"
   },
   "devDependencies": {
-    "babel-core": "^5.8.25",
-    "babel-loader": "^5.3.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
     "chai": "^3.5.0",
-    "css-loader": "^0.18.0",
-    "html-loader": "^0.3.0",
+    "css-loader": "^0.28.7",
+    "html-loader": "^0.5.1",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^1.0.1",
     "karma-mocha": "^1.0.1",
     "mocha": "^2.5.2",
-    "mocha-loader": "^0.7.1",
-    "node-sass": "^3.3.3",
-    "sass-loader": "^2.0.1",
-    "style-loader": "^0.12.4",
-    "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.14.0"
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "webpack": "^3.10.0"
   }
 }
