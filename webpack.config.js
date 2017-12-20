@@ -1,46 +1,69 @@
-var path = require('path');
-var webpack = require('webpack');
-var filename = 'clappr-playback-rate-plugin.js'
+const webpack = require("webpack");
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const path = require("path");
+const env = require("yargs").argv.env; // use --env with webpack 2
 
-module.exports = {
-  entry: path.resolve(__dirname, 'src/main.js'),
+let libraryName = "clappr-playback-rate-plugin";
+
+let plugins = [],
+  outputFile;
+
+if (env === "build") {
+  plugins.push(new UglifyJsPlugin({ minimize: true }));
+  outputFile = libraryName + ".min.js";
+} else {
+  outputFile = libraryName + ".js";
+}
+
+const config = {
+  entry: __dirname + "/src/main.js",
+  devtool: "source-map",
+  output: {
+    path: __dirname + "/lib",
+    filename: outputFile,
+    library: libraryName,
+    libraryTarget: "umd",
+    umdNamedDefine: true
+  },
   externals: {
-    "clappr": "Clappr",
-    "clappr-zepto": "clappr-zepto"
+    "clappr": "clappr",
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        loader: 'babel',
-        query: {
-            compact: true,
-        }
+        test: /(\.js)$/,
+        loader: "babel-loader",
+        exclude: /(node_modules|bower_components)/
       },
       {
         test: /\.scss$/,
-        loaders: ['css', 'sass?includePaths[]='
-          + path.resolve(__dirname, './node_modules/compass-mixins/lib')
-          + '&includePaths[]='
-          + path.resolve(__dirname, './node_modules/clappr/src/base/scss')
-          + '&includePaths[]='
-          + path.resolve(__dirname, './src/base/scss')
-        ],
-        include: path.resolve(__dirname, 'src'),
+        use: [
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              includePaths: [
+                path.resolve(__dirname, "./node_modules/compass-mixins/lib"),
+                path.resolve(__dirname, "./node_modules/clappr/src/base/scss")
+              ]
+            }
+          }
+        ]
       },
       {
-        test: /\.html/, loader: 'html?minimize=false'
-      },
-    ],
+        test: /\.html/,
+        loader: "html-loader",
+        options: {
+          minimize: false
+        }
+      }
+    ]
   },
   resolve: {
-    extensions: ['', '.js'],
+    modules: [path.resolve("./node_modules"), path.resolve("./src")],
+    extensions: [".js"]
   },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '<%=baseUrl%>/',
-    filename: filename,
-    library: 'PlaybackRatePlugin',
-    libraryTarget: 'umd',
-  },
+  plugins: plugins
 };
+
+module.exports = config;
