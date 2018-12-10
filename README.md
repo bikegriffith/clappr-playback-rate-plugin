@@ -22,13 +22,13 @@ import Clappr from 'clappr';
 import PlaybackRatePlugin from 'clappr-playback-rate-plugin';
 ```
 
-Then just add `PlaybackRatePlugin` into the list of plugins of your player instance:
+Then just add `PlaybackRatePlugin` into the list of plugins of your player instance (Specifying MediaControl first, it needs to get added to the container first):
 
 ```javascript
 var player = new Clappr.Player({
   source: "http://your.video/here.m3u8",
   plugins: {
-    'core': [PlaybackRatePlugin]
+    'core': [Clappr.MediaControl, PlaybackRatePlugin]
   }
 });
 ```
@@ -39,7 +39,7 @@ You can also customize the labels and title:
 var player = new Clappr.Player({
   source: "http://your.video/here.m3u8",
   plugins: {
-    'core': [PlaybackRatePlugin]
+    'core': [Clappr.MediaControl, PlaybackRatePlugin]
   },
   playbackRateConfig: {
     defaultValue: '1.0',

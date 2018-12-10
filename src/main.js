@@ -34,7 +34,7 @@ export default class PlaybackRatePlugin extends UICorePlugin {
   }
 
   bindEvents() {
-    this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_CONTAINERCHANGED, this.reload);
+    this.listenTo(this.core.mediaControl, Events.CORE_ACTIVE_CONTAINER_CHANGED, this.reload);
     this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_RENDERED, this.render);
     this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_HIDE, this.hideContextMenu);
     this.listenTo(this.core.mediaControl, PlaybackRatePlugin.MEDIACONTROL_PLAYBACKRATE, this.updatePlaybackRate);
@@ -52,11 +52,11 @@ export default class PlaybackRatePlugin extends UICorePlugin {
   }
 
   shouldRender() {
-    if (!this.core.getCurrentContainer()) {
+    if (!this.core.activeContainer) {
       return false;
     }
 
-    var currentPlayback = this.core.getCurrentPlayback();
+    var currentPlayback = this.core.activePlayback;
     if (currentPlayback.tagName != 'video' && currentPlayback.tagName != 'audio') {
       //console.warn('PlaybackRatePlugin#shouldRender: Cannot affect rate for playback', currentPlayback);
       return false;
