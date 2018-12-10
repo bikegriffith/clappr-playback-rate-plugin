@@ -1,14 +1,14 @@
 {
   "name": "clappr-playback-rate-plugin",
   "description": "A simple plugin for Clappr that adds support to manually select the playback rate on HTML5 containers.",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "license": "MIT",
   "repository": "bikegriffith/clappr-playback-rate-plugin",
   "main": "lib/clappr-playback-rate-plugin.js",
   "scripts": {
     "build": "webpack --env dev && webpack --env build",
     "dev": "webpack --progress --colors --watch --env dev",
-    "test": "node_modules/.bin/karma start --single-run --browsers Chrome"
+    "test": "echo \"no tests defined\""
   },
   "author": {
     "name": "Mike Griffith",
@@ -30,11 +30,6 @@
     "chai": "^3.5.0",
     "css-loader": "^0.28.7",
     "html-loader": "^0.5.1",
-    "karma": "^0.13.22",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^1.0.1",
-    "karma-mocha": "^1.0.1",
-    "mocha": "^2.5.2",
     "node-sass": "^4.11.0",
     "sass-loader": "^6.0.6",
     "webpack": "^3.10.0"
