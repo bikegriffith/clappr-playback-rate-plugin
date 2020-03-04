@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=655, user-scalable=yes" />
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@0.2.100/dist/clappr.min.js"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <script type="text/javascript" src="clappr-playback-rate-plugin.js"></script>
+    <style>
+      .player {
+        width: 640px;
+        height: 360px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="player"></div>
+    <script>
+      var player;
+
+      (function () {
+        console.log('Clappr version ' + Clappr.version);
+        // Clappr.Log.setLevel(0)
+
+        player = new Clappr.Player({
+          parentId: ".player",
+          source: 'http://clappr.io/highline.mp4',
+          width: '100%',
+          height: '100%',
+          autoPlay: !Clappr.Browser.isMobile,
+          hideMediaControl: false,
+          plugins: [
+            PlaybackRatePlugin,
+          ],
+          // playbackRateConfig: {
+          //   defaultValue: '1.0',
+          //   options: [
+          //       {value: '0.5', label: '0.5x'},
+          //       {value: '1.0', label: '1x'},
+          //       {value: '2.0', label: '2x'},
+          //   ],
+          //   rateSuffix: 'x',
+          // },
+        });
+
+      })();
+    </script>
+  </body>
+</html>
