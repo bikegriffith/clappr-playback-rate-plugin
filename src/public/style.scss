@@ -1,3 +1,7 @@
+button[data-playback-rate-button] {
+  white-space: nowrap;
+}
+
 .media-control[data-media-control] .media-control-layer[data-controls] .playback_rate[data-playback-rate-select] {
   float: right;
   margin-top: 5px;
@@ -8,7 +12,8 @@
     -webkit-font-smoothing: antialiased;
     font-size: 12px;
     cursor: pointer;
-    padding: 10px;
+    padding-top: 10px;
+    margin-right: 10px;
 
     &:hover {
       color: #c9c9c9;

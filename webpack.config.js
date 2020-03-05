@@ -1,69 +1,83 @@
-const webpack = require("webpack");
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-const path = require("path");
-const env = require("yargs").argv.env; // use --env with webpack 2
+// Webpack 4 configuration
+const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin');
 
-let libraryName = "clappr-playback-rate-plugin";
+var name = 'clappr-playback-rate-plugin'
+var outputFile, plugins = [], optimization = {}
 
-let plugins = [],
-  outputFile;
-
-if (env === "build") {
-  plugins.push(new UglifyJsPlugin({ minimize: true }));
-  outputFile = libraryName + ".min.js";
+if (process.env.npm_lifecycle_event === 'dist') {
+  outputFile = name + '.min.js'
+  optimization.minimizer = [
+    new TerserPlugin({
+      cache: true, // TODO: set to false if Webpack upgraded to 5.x ?
+    }),
+  ]
 } else {
-  outputFile = libraryName + ".js";
+  outputFile = name + '.js'
+  optimization.minimize = false
 }
 
-const config = {
-  entry: __dirname + "/src/main.js",
-  devtool: "source-map",
+module.exports = {
+  entry: path.resolve(__dirname, 'src/main.js'),
+  devtool: 'source-map',
   output: {
-    path: __dirname + "/lib",
+    path: path.resolve(__dirname, 'lib'),
     filename: outputFile,
-    library: libraryName,
-    libraryTarget: "umd",
-    umdNamedDefine: true
+    library: 'PlaybackRatePlugin',
+    libraryExport: 'default',
+    libraryTarget: 'umd',
   },
-  externals: {
-    "clappr": "clappr",
-  },
+  optimization: optimization,
   module: {
     rules: [
       {
-        test: /(\.js)$/,
-        loader: "babel-loader",
-        exclude: /(node_modules|bower_components)/
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader'
+        },
+        include: [
+          path.resolve(__dirname, 'src')
+        ],
       },
       {
         test: /\.scss$/,
         use: [
-          "css-loader",
           {
-            loader: "sass-loader",
-            options: {
-              includePaths: [
-                path.resolve(__dirname, "./node_modules/compass-mixins/lib"),
-                path.resolve(__dirname, "./node_modules/clappr/src/base/scss")
-              ]
-            }
-          }
-        ]
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
-        test: /\.html/,
-        loader: "html-loader",
-        options: {
-          minimize: false
-        }
-      }
-    ]
+        test: /\.html$/,
+        use: {
+          loader: "html-loader",
+          options: {
+            minimize: false
+          }
+        },
+      },
+    ],
   },
-  resolve: {
-    modules: [path.resolve("./node_modules"), path.resolve("./src")],
-    extensions: [".js"]
+  plugins: plugins,
+  externals: {
+   clappr: {
+    amd: 'clappr',
+    commonjs: 'clappr',
+    commonjs2: 'clappr',
+    root: 'Clappr'
+   }
   },
-  plugins: plugins
-};
-
-module.exports = config;
+  devServer: {
+    contentBase: [
+      path.resolve(__dirname, "public"),
+    ],
+    // publicPath: '/js/',
+    disableHostCheck: true, // https://github.com/webpack/webpack-dev-server/issues/882
+    compress: true,
+    host: "0.0.0.0",
+    port: 8080
+  }
+}

@@ -6,8 +6,11 @@
   "repository": "bikegriffith/clappr-playback-rate-plugin",
   "main": "lib/clappr-playback-rate-plugin.js",
   "scripts": {
-    "build": "webpack --env dev && webpack --env build",
-    "dev": "webpack --progress --colors --watch --env dev",
+    "build": "webpack --progress --mode production",
+    "dist": "webpack --progress --mode production",
+    "lint": "eslint webpack.config.js src/**/*.js && stylelint src/**/*.scss",
+    "release": "npm run lint && npm run build && npm run dist",
+    "start": "webpack-dev-server --mode development",
     "test": "echo \"no tests defined\""
   },
   "author": {
@@ -19,19 +22,21 @@
     "clappr",
     "plugin"
   ],
-  "dependencies": {
-    "clappr": "^0.3.1",
-    "clappr-zepto": "latest"
-  },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.7.0",
-    "chai": "^3.5.0",
-    "css-loader": "^0.28.7",
-    "html-loader": "^0.5.1",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^6.0.6",
-    "webpack": "^3.10.0"
+    "@babel/core": "^7.8",
+    "@babel/preset-env": "^7.8",
+    "babel-loader": "^8.0",
+    "core-js": "^3.6",
+    "css-loader": "^3.4",
+    "eslint": "^6.8",
+    "html-loader": "^0.5",
+    "node-sass": "^4.12",
+    "sass-loader": "^8.0",
+    "stylelint": "^13.2",
+    "stylelint-config-recommended": "^3.0",
+    "terser-webpack-plugin": "^2.3",
+    "webpack": "^4.0",
+    "webpack-cli": "^3.3",
+    "webpack-dev-server": "^3.10"
   }
 }

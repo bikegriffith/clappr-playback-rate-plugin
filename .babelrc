@@ -1,14 +1,7 @@
 {
-  "presets": [
-    ["env", {
-      "targets": {
-        "browsers": ["last 2 versions", "safari >= 7"]
-      },
-	  "modules": false
-    }]
-  ],
-  "ignore": [
-    "node_modules",
-    "src/public/*"
-  ]
+  "presets": [["@babel/preset-env", {
+    "modules": "commonjs",
+    "corejs": "3",
+    "useBuiltIns": "usage"
+  }]]
 }
