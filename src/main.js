@@ -62,10 +62,7 @@ export default class PlaybackRatePlugin extends UICorePlugin {
 
   reload() {
     this.stopListening()
-    // Ensure it stop listening before rebind events (avoid duplicate events)
-    process.nextTick(() => {
-      this.bindEvents()
-    })
+    this.bindEvents()
   }
 
   shouldRender() {
