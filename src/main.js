@@ -1,4 +1,4 @@
-import {Events, Styler, UICorePlugin, template} from 'clappr'
+import {Events, Styler, UICorePlugin, template} from '@clappr/player'
 import pluginHtml from './public/playback-rate-selector.html'
 import pluginStyle from './public/style.scss'
 
@@ -16,6 +16,14 @@ const DEFAULT_PLAYBACK_RATE_SUFFIX = 'x' // Used by getTitle method
 export default class PlaybackRatePlugin extends UICorePlugin {
   get name() { return 'playback_rate' }
   get template() { return template(pluginHtml) }
+
+	/**
+	 * Clappr 0.4.x wants to know what versions this plugin is targeting.
+	 */
+	get supportedVersion()
+	{
+		return { min: '0.4.0', max: '0.5.0' };
+	}
 
   get attributes() {
     return {

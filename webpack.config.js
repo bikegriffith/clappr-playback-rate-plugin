@@ -63,10 +63,10 @@ module.exports = {
   },
   plugins: plugins,
   externals: {
-   clappr: {
-    amd: 'clappr',
-    commonjs: 'clappr',
-    commonjs2: 'clappr',
+   '@clappr/player': {
+    amd: '@clappr/player',
+    commonjs: '@clappr/player',
+    commonjs2: '@clappr/player',
     root: 'Clappr'
    }
   },
